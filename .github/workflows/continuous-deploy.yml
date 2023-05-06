@@ -24,7 +24,7 @@ jobs:
 
       - name: Install Requirements
         run: |
-          pip install flask pytest pytest-cov flask-wtf
+          pip install -r requirements-dev.txt
 
       - name: Unit Test
         run: python -m unittest -v
