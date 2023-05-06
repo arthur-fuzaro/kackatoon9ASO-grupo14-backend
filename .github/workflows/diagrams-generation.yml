@@ -1,4 +1,4 @@
-name: Diagrams Generation
+name: Diagrams Generation Workflow
 
 on:
   push:
