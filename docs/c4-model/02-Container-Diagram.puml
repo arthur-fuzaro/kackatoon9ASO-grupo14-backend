@@ -1,0 +1,36 @@
+@startuml 02-ContainerDiagram
+!include <C4/C4_Container>
+
+/' Level 2: Container diagram
+   A container is something like a server-side web application, single-page application, desktop application, 
+   mobile app, database schema, file system, etc. 
+   Essentially, a container is a separately runnable/deployable unit (e.g. a separate process space) 
+   that executes code or stores data.
+'/
+
+title "Diagrama de Container para a SpotMusic"
+
+LAYOUT_LEFT_RIGHT()
+
+AddElementTag("microService", $shape=EightSidedShape(), $legendText="micro service\'")
+AddElementTag("storage", $shape=RoundedBoxShape())
+
+System_Boundary(internet, "Internet") {
+    Person_Ext(person, "Usuário", "Uma pessoa que procurar por recomendações de músicas")
+}
+
+System_Boundary(cloud, "Google Cloud Platform") {
+    System_Boundary(spot_music, "SpotMusic", "Sistema de recomendação de músicas"){
+        Container(frontend, "Frontend", "React, JavaScript", "Interface de usuário")
+        Container(backend, "Backend", "gunicorn, Flask, Python", "Aplicação Web", $tags = "microService")
+        Container(storage, "Storage", "MySQL, port 3306", "Armazenamento de dados", $tags = "storage")
+    }
+}
+
+Rel(person, frontend, "Visita", "HTTPS")
+Rel(frontend, backend, "Acessa a", "HTTPS")
+Rel(backend, storage, "Lê dados de", "pymysql")
+
+LAYOUT_WITH_LEGEND()
+
+@enduml
