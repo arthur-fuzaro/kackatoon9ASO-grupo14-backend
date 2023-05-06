@@ -17,7 +17,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          ref: HEAD:$GITHUB_REF
           persist-credentials: true
           fetch-depth: 0
 
