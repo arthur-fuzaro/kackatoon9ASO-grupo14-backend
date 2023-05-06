@@ -2,8 +2,6 @@ name: Diagrams Generation
 
 on:
   push:
-    branches:
-      - "**"
     branches-ignore:
       - main
     paths:
