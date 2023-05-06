@@ -1,0 +1,23 @@
+@startuml 01-ContextDiagram
+!include <C4/C4_Container>
+
+/' Level 1: System Context diagram
+   A System Context diagram is a good starting point for diagramming and documenting a software system,
+   allowing you to step back and see the big picture.
+'/
+
+title "Diagrama de Contexto para a SpotMusic"
+
+System_Boundary(internet, "Internet") {
+    Person_Ext(person, "Usuário", "Uma pessoa que procurar por recomendações de músicas")
+}
+
+System_Boundary(cloud, "Google Cloud Platform") {
+    System(spot_music, "SpotMusic", "Sistema de recomendação de músicas")
+}
+
+Rel(person, spot_music, "Procura por recomendações de músicas", "HTTP")
+
+LAYOUT_WITH_LEGEND()
+
+@enduml
