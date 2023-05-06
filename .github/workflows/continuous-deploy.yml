@@ -4,10 +4,15 @@ on:
   push:
     branches:
       - main
-
+    paths-ignore:
+      - ".github/workflows/diagrams-generation.yml"
+      - "docs/c4-model/*.puml"
   pull_request:
     branches:
       - main
+    paths-ignore:
+      - ".github/workflows/diagrams-generation.yml"
+      - "docs/c4-model/*.puml"
 
   workflow_dispatch:
 
