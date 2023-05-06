@@ -13,15 +13,11 @@ jobs:
   diagrams-generation:
     runs-on: ubuntu-latest
 
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          ref: main
+          ref: HEAD:$GITHUB_REF
           persist-credentials: true
           fetch-depth: 0
 
@@ -64,14 +60,14 @@ jobs:
           git config --local user.name "C4 Model Diagrams Generation"
           git add --all
           git commit -m "doc(diagrams): update diagrams"
-          git pull origin ${GITHUB_REF##*/}
+          git pull origin HEAD:$GITHUB_REF
 
       - name: Push the changes
         if: ${{ env.SHOULD_I_COMMIT == 'Yes' }}
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${GITHUB_REF##*/}
+          branch: HEAD:$GITHUB_REF
 
       - name: Environment Teardown
         if: always()
