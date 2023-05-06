@@ -1,9 +1,9 @@
-name: Diagrams Generation
+name: Diagrams Generation Workflow
 
 on:
   push:
-    branches:
-      - "main"
+    branches-ignore:
+      - main
     paths:
       - ".github/workflows/diagrams-generation.yml"
       - "docs/c4-model/*.puml"
@@ -13,15 +13,11 @@ jobs:
   diagrams-generation:
     runs-on: ubuntu-latest
 
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          ref: main
+          ref: ${{ github.ref }}
           persist-credentials: true
           fetch-depth: 0
 
@@ -64,14 +60,14 @@ jobs:
           git config --local user.name "C4 Model Diagrams Generation"
           git add --all
           git commit -m "doc(diagrams): update diagrams"
-          git pull origin main
+          git pull origin ${GITHUB_REF##*/}
 
       - name: Push the changes
         if: ${{ env.SHOULD_I_COMMIT == 'Yes' }}
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-          branch: main
+          branch: ${{ github.ref }}
 
       - name: Environment Teardown
         if: always()
