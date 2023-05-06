@@ -1,0 +1,6 @@
+flask
+flask-wtf
+tox
+pytest
+pytest-xdist
+coverage
