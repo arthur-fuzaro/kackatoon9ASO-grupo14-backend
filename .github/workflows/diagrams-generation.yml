@@ -64,14 +64,14 @@ jobs:
           git config --local user.name "C4 Model Diagrams Generation"
           git add --all
           git commit -m "doc(diagrams): update diagrams"
-          git pull origin main
+          git pull origin ${GITHUB_REF##*/}
 
       - name: Push the changes
         if: ${{ env.SHOULD_I_COMMIT == 'Yes' }}
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: main
+          branch: ${GITHUB_REF##*/}
 
       - name: Environment Teardown
         if: always()
