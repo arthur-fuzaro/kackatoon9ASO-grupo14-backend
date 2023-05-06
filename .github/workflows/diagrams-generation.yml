@@ -17,6 +17,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
+          ref: ${{ github.ref }}
           persist-credentials: true
           fetch-depth: 0
 
