@@ -59,7 +59,6 @@ jobs:
           git config --local user.name "C4 Model Diagrams Generation"
           git add --all
           git commit -m "doc(diagrams): update diagrams"
-          git pull origin HEAD:$GITHUB_REF
 
       - name: Push the changes
         if: ${{ env.SHOULD_I_COMMIT == 'Yes' }}
