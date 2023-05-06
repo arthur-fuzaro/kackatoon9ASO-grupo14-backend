@@ -65,7 +65,7 @@ jobs:
         if: ${{ env.SHOULD_I_COMMIT == 'Yes' }}
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           branch: ${{ github.ref }}
 
       - name: Environment Teardown
